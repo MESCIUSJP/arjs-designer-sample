@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- ページ全体の文字コード・表示設定と、ActiveReportsJSのスタイル／ライブラリを読み込みます。 -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f7fa" />
+    <title>ActiveReportsJS レポートデザイナー</title>
+    <!-- ActiveReportsJSのスタイルとJavaScriptは、MESCIUSのCDNからバージョン6.0.1を読み込みます。 -->
+    <link rel="stylesheet" href="https://cdn.mescius.com/activereportsjs/6.0.1/styles/ar-js-ui.css" />
+    <link rel="stylesheet" href="https://cdn.mescius.com/activereportsjs/6.0.1/styles/ar-js-designer.css" />
+    <link rel="stylesheet" href="https://cdn.mescius.com/activereportsjs/6.0.1/styles/ar-js-viewer.css" />
+    <!-- このアプリ独自の見た目は、サーバーから配信するCSSで設定します。 -->
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://cdn.mescius.com/activereportsjs/6.0.1/dist/ar-js-core.js"></script>
+    <script src="https://cdn.mescius.com/activereportsjs/6.0.1/dist/ar-js-designer.js"></script>
+    <script src="https://cdn.mescius.com/activereportsjs/6.0.1/dist/ar-js-viewer.js"></script>
+    <script src="https://cdn.mescius.com/activereportsjs/6.0.1/dist/locales/ar-js-locales.js"></script>
+    <script src="https://cdn.mescius.com/activereportsjs/6.0.1/dist/locales/designer/ja-locale.js"></script>
+    <!-- ActiveReportsJSのライブラリを読み込んだ後、キーをGitHubに登録しないlicense.jsから読み込みます。 -->
+    <script src="/license.js"></script>
+    <script>
+      // license.jsで設定されたキーを空白除去後に取得します。
+      const distributionKey = window.ARJS_DISTRIBUTION_KEY?.trim();
+      // キーが設定されている場合に限り、ActiveReportsJSへライセンスキーを登録します。
+      if (distributionKey) {
+        MESCIUS.ActiveReportsJS.Core.setLicenseKey(distributionKey);
+      }
+    </script>
+  </head>
+  <body>
+    <!-- デザイナー本体を表示する領域です。 -->
+    <main>
+      <div id="designer-host" aria-label="レポートデザイナー"></div>
+    </main>
+    <!-- 現在の文書名と処理結果を支援技術にも通知するための領域です。 -->
+    <div class="visually-hidden" aria-live="polite">
+      <span id="current-document">新しいレポート</span>
+      <span id="status-message" role="status">準備中…</span>
+    </div>
+
+    <!-- 新しいレポートの形式をカードから選択します。 -->
+    <dialog id="create-dialog" class="app-dialog">
+      <div class="dialog-heading">
+        <h2>レポート</h2>
+        <button class="button button-quiet" type="button" onclick="this.closest('dialog').close()">閉じる</button>
+      </div>
+      <div class="report-type-cards">
+        <button class="report-type-card" type="button" data-report-type="page">
+          <span class="report-type-icon" aria-hidden="true">▤</span>
+          <span>ページレポート</span>
+        </button>
+        <button class="report-type-card" type="button" data-report-type="rdl">
+          <span class="report-type-icon" aria-hidden="true">▥</span>
+          <span>RDLレポート</span>
+        </button>
+      </div>
+    </dialog>
+
+    <!-- Reports フォルダーの一覧を JavaScript で挿入する「開く」ダイアログです。 -->
+    <dialog id="open-dialog" class="app-dialog">
+      <div class="dialog-heading">
+        <h2>レポートを開く</h2>
+        <button id="close-open" class="button button-quiet" type="button">閉じる</button>
+      </div>
+      <div id="report-list" class="report-list"></div>
+    </dialog>
+
+    <!-- 保存名の入力と入力エラーの表示を行います。拡張子は形式に応じて表示します。 -->
+    <dialog id="save-dialog" class="app-dialog save-dialog">
+      <div class="dialog-heading"><h2>名前を付けて保存</h2></div>
+      <label for="save-name">ファイル名</label>
+      <div class="save-name-row">
+        <input id="save-name" type="text" maxlength="120" autocomplete="off" />
+        <span>.rdlx-json</span>
+      </div>
+      <p id="save-error" class="dialog-error" role="alert"></p>
+      <div class="dialog-actions">
+        <button id="cancel-save" class="button button-quiet" type="button">キャンセル</button>
+        <button id="confirm-save" class="button button-primary" type="button">保存</button>
+      </div>
+    </dialog>
+
+    <!-- プレビュー用 Viewer の表示領域です。 -->
+    <dialog id="preview-dialog" class="preview-dialog">
+      <div class="preview-heading">
+        <h2>レポートプレビュー</h2>
+        <button id="close-preview" class="button button-quiet" type="button">閉じる</button>
+      </div>
+      <div id="viewer-host"></div>
+    </dialog>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

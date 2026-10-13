@@ -1,0 +1,237 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  color: #172b4d;
+  background: #f5f7fa;
+  font-family: "Segoe UI", "Yu Gothic UI", Meiryo, sans-serif;
+}
+
+.button {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.button-quiet {
+  border-color: #d5dee8;
+  color: #263c56;
+  background: #fff;
+}
+
+.button-quiet:hover {
+  background: #f2f6fa;
+}
+
+main,
+#designer-host {
+  width: 100%;
+  height: 100%;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.preview-dialog,
+.app-dialog {
+  padding: 0;
+  border: 1px solid #d2dce6;
+  border-radius: 9px;
+  box-shadow: 0 16px 48px rgb(22 40 63 / 22%);
+}
+
+.app-dialog {
+  width: min(520px, calc(100vw - 32px));
+  max-width: none;
+  color: #172b4d;
+  background: #fff;
+}
+
+.app-dialog::backdrop,
+.preview-dialog::backdrop {
+  background: rgb(17 32 50 / 35%);
+}
+
+.dialog-heading {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  justify-content: space-between;
+  padding: 0 18px;
+  border-bottom: 1px solid #e0e6ed;
+}
+
+.dialog-heading h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.report-type-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 22px;
+}
+
+.report-type-card {
+  display: grid;
+  min-height: 130px;
+  align-content: center;
+  justify-items: center;
+  gap: 12px;
+  border: 1px solid #d5dee8;
+  border-radius: 8px;
+  color: #263c56;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.report-type-card:hover,
+.report-type-card:focus-visible {
+  border-color: #3478c8;
+  background: #f2f7fd;
+}
+
+.report-type-icon {
+  color: #3478c8;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.report-list {
+  display: grid;
+  max-height: min(55vh, 440px);
+  gap: 7px;
+  overflow: auto;
+  padding: 16px;
+}
+
+.report-list-item {
+  padding: 11px 13px;
+  border: 1px solid #d5dee8;
+  border-radius: 5px;
+  color: #263c56;
+  background: #fff;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.report-list-item:hover:not(:disabled) {
+  background: #f2f6fa;
+}
+
+.dialog-empty {
+  margin: 12px 0;
+  color: #61758a;
+}
+
+.save-dialog {
+  padding-bottom: 16px;
+}
+
+.save-dialog label,
+.save-name-row,
+.dialog-error,
+.dialog-actions {
+  margin-right: 18px;
+  margin-left: 18px;
+}
+
+.save-dialog label {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 7px;
+  font-size: 13px;
+}
+
+.save-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-name-row input {
+  min-width: 0;
+  flex: 1;
+  height: 36px;
+  padding: 0 9px;
+  border: 1px solid #bdc9d6;
+  border-radius: 4px;
+  font: inherit;
+}
+
+.dialog-error {
+  min-height: 18px;
+  color: #b42318;
+  font-size: 12px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.button-primary {
+  color: #fff;
+  background: #1769aa;
+}
+
+.button-primary:hover {
+  background: #12598f;
+}
+
+.preview-dialog::backdrop {
+  background: rgb(17 32 50 / 35%);
+}
+
+.preview-heading h2 {
+  font-size: 17px;
+}
+
+.preview-dialog {
+  width: min(1100px, calc(100vw - 40px));
+  height: min(800px, calc(100vh - 40px));
+  max-width: none;
+  max-height: none;
+}
+
+.preview-heading {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  justify-content: space-between;
+  padding: 0 15px;
+  border-bottom: 1px solid #e0e6ed;
+  background: #fff;
+}
+
+#viewer-host {
+  height: calc(100% - 52px);
+}
+
+@media (max-width: 680px) {
+  .button {
+    padding: 0 9px;
+    font-size: 12px;
+  }
+
+}
